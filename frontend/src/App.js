@@ -11,9 +11,9 @@ function App() {
     email: "",
   });
 
-  const submitForm = (data) => {
-    console.log(data);
-    return axios.post(`/users/submit`, data);
+  const submitForm = (form) => {
+    console.log(form);
+    return axios.post(`/users/submit`, form);
   };
 
   // const handleChange = (event) => {
@@ -26,6 +26,7 @@ function App() {
     <div className="App">
       <section className="submission">
         <form
+          method="POST"
           className="form"
           onSubmit={(event) => {
             event.preventDefault();

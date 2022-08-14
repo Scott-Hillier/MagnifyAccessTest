@@ -1,14 +1,24 @@
 const express = require("express");
 const router = express.Router();
 
-const addUser = () => {
+const addUser = (db, form) => {
+  console.log(form);
   const query = `INSERT INTO users
   (name, personal_id, department, employment_status, email)
   VALUES ($1, $2, $3, $4, $5);`;
+  const values = [
+    form.name,
+    form.id,
+    form.department,
+    form.employment,
+    form.email,
+  ];
+  return db.query(query, values);
 };
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
+    console.log("hello");
     db.query(`SELECT * FROM users;`)
       .then((data) => {
         const users = data.rows;
@@ -19,11 +29,12 @@ module.exports = (db) => {
       });
   });
   router.post("/submit", (req, res) => {
-    console.log(req.body);
-    addUser(req.body)
+    console.log("HEHER", req.body);
+    addUser(db, req.body)
       .then((data) => {
-        const users = data.rows;
-        res.json({ users });
+        console.log("Done");
+        // const users = data.rows;
+        // res.json({ users });
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
