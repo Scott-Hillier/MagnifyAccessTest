@@ -1,23 +1,75 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
+  const [formState, setFormState] = useState({
+    name: "",
+    id: 0,
+    department: "",
+    employment: "",
+    email: "",
+  });
+
+  // const handleChange = (event) => {
+  //   setFormState((prev) => {
+  //     return { ...prev, name: event.target.value };
+  //   });
+  // };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <section className="submission">
+        <form className="form">
+          <input
+            className="input"
+            placeholder="Name"
+            onChange={(e) => {
+              setFormState((prev) => {
+                return { ...prev, name: e.target.value };
+              });
+            }}
+          ></input>
+          <input
+            className="input"
+            placeholder="ID"
+            onChange={(e) => {
+              setFormState((prev) => {
+                return { ...prev, id: e.target.value };
+              });
+            }}
+          ></input>
+          <input
+            className="input"
+            placeholder="Department"
+            onChange={(e) => {
+              setFormState((prev) => {
+                return { ...prev, department: e.target.value };
+              });
+            }}
+          ></input>
+          <input
+            className="input"
+            placeholder="Emplyment Status"
+            onChange={(e) => {
+              setFormState((prev) => {
+                return { ...prev, employment: e.target.value };
+              });
+            }}
+          ></input>
+          <input
+            className="input"
+            placeholder="Email"
+            onChange={(e) => {
+              setFormState((prev) => {
+                return { ...prev, email: e.target.value };
+              });
+            }}
+          ></input>
+          <button className="submit" type="submit">
+            Submit
+          </button>
+        </form>
+      </section>
     </div>
   );
 }
