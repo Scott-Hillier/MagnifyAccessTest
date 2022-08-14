@@ -21,7 +21,7 @@ function App() {
 
   const search = (data) => {
     console.log(data);
-    return axios.get(`/users/search/${data.field}/${data.input}`, data);
+    return axios.get(`/users/search/${data.field}/${data.input}`);
   };
 
   return (
@@ -127,7 +127,7 @@ function App() {
             }}
           ></input>
           <button className="submit" type="submit">
-            Submit
+            Search
           </button>
         </form>
       </section>

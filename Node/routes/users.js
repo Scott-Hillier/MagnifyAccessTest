@@ -16,6 +16,7 @@ const addUser = (db, form) => {
 };
 
 const searchUsers = (db, field, input) => {
+  console.log("function", field, input);
   const query = `SELECT * FROM users
   WHERE $1 LIKE $2;`;
   const values = [field, `%${input}%`];
