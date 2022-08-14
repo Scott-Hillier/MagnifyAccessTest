@@ -10,6 +10,10 @@ function App() {
     employment: "",
     email: "",
   });
+  const [searchState, setSearchState] = useState({
+    field: "name",
+    input: "",
+  });
 
   const submitForm = (form) => {
     console.log(form);
@@ -89,6 +93,42 @@ function App() {
               console.log(e.target.value);
             }}
           />
+          <button className="submit" type="submit">
+            Submit
+          </button>
+        </form>
+      </section>
+      <section className="lookup">
+        <form
+          method="GET"
+          className="lookup-form"
+          onSubmit={(event) => {
+            event.preventDefault();
+            console.log(searchState);
+            // submitSearch(searchState);
+          }}
+        >
+          <select
+            onChange={(e) => {
+              setSearchState((prev) => {
+                return { ...prev, field: e.target.value };
+              });
+            }}
+          >
+            <option value="name">Name</option>
+            <option value="id">ID</option>
+            <option value="department">Department</option>
+            <option value="employment_status">Employment Status</option>
+            <option value="email">Email</option>
+          </select>
+          <input
+            placeholder="Search"
+            onChange={(e) => {
+              setSearchState((prev) => {
+                return { ...prev, input: e.target.value };
+              });
+            }}
+          ></input>
           <button className="submit" type="submit">
             Submit
           </button>

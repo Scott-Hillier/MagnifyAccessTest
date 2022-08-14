@@ -32,7 +32,7 @@ module.exports = (db) => {
     console.log("HEHER", req.body);
     addUser(db, req.body)
       .then((data) => {
-        console.log("Done");
+        console.log("Submitted");
         // const users = data.rows;
         // res.json({ users });
       })
