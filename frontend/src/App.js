@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./App.css";
 
 function App() {
@@ -10,6 +11,11 @@ function App() {
     email: "",
   });
 
+  const submitForm = (data) => {
+    console.log(data);
+    return axios.post(`/users/submit`, data);
+  };
+
   // const handleChange = (event) => {
   //   setFormState((prev) => {
   //     return { ...prev, name: event.target.value };
@@ -19,7 +25,13 @@ function App() {
   return (
     <div className="App">
       <section className="submission">
-        <form className="form">
+        <form
+          className="form"
+          onSubmit={(event) => {
+            event.preventDefault();
+            submitForm(formState);
+          }}
+        >
           <input
             className="input"
             placeholder="Name"
@@ -28,6 +40,7 @@ function App() {
                 return { ...prev, name: e.target.value };
               });
             }}
+            required
           ></input>
           <input
             className="input"
@@ -37,6 +50,7 @@ function App() {
                 return { ...prev, id: e.target.value };
               });
             }}
+            required
           ></input>
           <input
             className="input"
@@ -46,6 +60,7 @@ function App() {
                 return { ...prev, department: e.target.value };
               });
             }}
+            required
           ></input>
           <input
             className="input"
@@ -55,6 +70,7 @@ function App() {
                 return { ...prev, employment: e.target.value };
               });
             }}
+            required
           ></input>
           <input
             className="input"
@@ -64,6 +80,7 @@ function App() {
                 return { ...prev, email: e.target.value };
               });
             }}
+            required
           ></input>
           <input
             type="file"
