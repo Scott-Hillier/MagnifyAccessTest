@@ -65,6 +65,12 @@ function App() {
               });
             }}
           ></input>
+          <input
+            type="file"
+            onChange={(e) => {
+              console.log(e.target.value);
+            }}
+          />
           <button className="submit" type="submit">
             Submit
           </button>
