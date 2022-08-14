@@ -16,15 +16,13 @@ function App() {
   });
 
   const submitForm = (form) => {
-    console.log(form);
     return axios.post(`/users/submit`, form);
   };
 
-  // const handleChange = (event) => {
-  //   setFormState((prev) => {
-  //     return { ...prev, name: event.target.value };
-  //   });
-  // };
+  const search = (data) => {
+    console.log(data);
+    return axios.get(`/users/search/${data.field}/${data.input}`, data);
+  };
 
   return (
     <div className="App">
@@ -104,8 +102,7 @@ function App() {
           className="lookup-form"
           onSubmit={(event) => {
             event.preventDefault();
-            console.log(searchState);
-            // submitSearch(searchState);
+            search(searchState);
           }}
         >
           <select
