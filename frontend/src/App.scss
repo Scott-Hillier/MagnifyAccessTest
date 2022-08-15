@@ -1,13 +1,27 @@
 .App {
   text-align: center;
-  background-color: #282c34;
+  background-color: #2d3546;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: whitesmoke;
+}
+
+.navbar {
+}
+
+#title {
+  color: aliceblue;
+}
+
+.sub-header {
+  display: flex;
+  width: 90vw;
+  align-items: right;
+  border-bottom: 2px solid black;
 }
 
 .submission {
@@ -23,19 +37,38 @@
 .input {
   text-align: center;
   margin: 0.5em;
+  width: 30%;
   border-radius: 5px;
+  background-color: whitesmoke;
 }
 
 .submit {
   border-radius: 5px;
+  margin: 0.55em;
+  width: 30%;
+  background-color: aliceblue;
 }
 .submit:hover {
   background-color: #5c616d;
 }
 
+.lookup {
+  display: flex;
+  flex-direction: column;
+}
+
+.lookup-form {
+  display: flex;
+  flex-direction: row;
+}
+
+.select {
+  margin: 0.5em;
+}
+
 .results {
   width: 90vw;
-  border: 2px solid green;
+  // border: 2px solid green;
 }
 
 .header {
