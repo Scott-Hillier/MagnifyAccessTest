@@ -49,13 +49,7 @@ const SubmissionForm = () => {
           event.preventDefault();
           submitForm(formState);
           uploadFile(file);
-          setFormState({
-            name: "",
-            id: 0,
-            department: "",
-            employment: "",
-            email: "",
-          });
+          window.location.reload();
         }}
       >
         <input
@@ -93,7 +87,7 @@ const SubmissionForm = () => {
         ></input>
         <input
           className="input"
-          placeholder="Emplyment Status"
+          placeholder="Employment Status"
           onChange={(e) => {
             setFormState((prev) => {
               return {

@@ -34,7 +34,7 @@ const SearchForm = ({ resultsState, setResultsState }) => {
           }}
         >
           <option value="name">Name</option>
-          <option value="id">ID</option>
+          <option value="personal_id">ID</option>
           <option value="department">Department</option>
           <option value="employment_status">Employment Status</option>
           <option value="email">Email</option>
