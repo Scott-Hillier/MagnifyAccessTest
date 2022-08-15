@@ -14,7 +14,10 @@ function App() {
   return (
     <main className="App">
       <Navbar />
-      <Display setDisplayState={setDisplayState} />
+      <Display
+        setDisplayState={setDisplayState}
+        setResultsState={setResultsState}
+      />
       {displayState === "submission" && (
         <SubmissionForm setDisplayState={setDisplayState} />
       )}

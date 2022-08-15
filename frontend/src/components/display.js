@@ -1,12 +1,13 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
 
-const Display = ({ setDisplayState }) => {
+const Display = ({ setDisplayState, setResultsState }) => {
   return (
     <section className="display">
       <h3
         className={"display-option"}
         onClick={() => {
+          setResultsState([]);
           setDisplayState("submission");
         }}
       >
