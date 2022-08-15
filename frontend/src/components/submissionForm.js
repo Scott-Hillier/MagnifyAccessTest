@@ -47,9 +47,10 @@ const SubmissionForm = () => {
         className="form"
         onSubmit={(event) => {
           event.preventDefault();
-          submitForm(formState);
-          uploadFile(file);
-          window.location.reload();
+          uploadFile(file).then(() => {
+            submitForm(formState);
+            window.location.reload();
+          });
         }}
       >
         <input
