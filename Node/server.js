@@ -7,7 +7,7 @@ const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
-
+const fileUpload = require("express-fileupload");
 const bodyParser = require("body-parser");
 
 // PG database client/connection setup
@@ -20,7 +20,7 @@ db.connect();
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan("dev"));
-
+app.use(fileUpload());
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -45,10 +45,12 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
+const uploadRoutes = require("./routes/upload");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/users", usersRoutes(db));
+app.use("/upload", uploadRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
 
@@ -58,6 +60,23 @@ app.use("/users", usersRoutes(db));
 
 app.get("/", (req, res) => {
   res.render("index");
+});
+
+app.post("/upload", (req, res) => {
+  if (req.files === null) {
+    return res.status(400).json({ msg: "No file uploaded" });
+  }
+
+  const file = req.files.file;
+
+  file.mv(`${__dirname}/public/uploads/${file.name}`, (err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send(err);
+    }
+
+    res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+  });
 });
 
 app.listen(PORT, () => {

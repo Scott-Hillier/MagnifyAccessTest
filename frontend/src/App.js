@@ -14,31 +14,39 @@ function App() {
     field: "name",
     input: "",
   });
-  const [fileState, setFileState] = useState("");
-
   const [resultsState, setResultsState] = useState([]);
+  const [file, setFile] = useState("");
+  const [filename, setFilename] = useState("Choose File");
+  const [uploadedFile, setUploadedFile] = useState({});
+  const [message, setMessage] = useState("");
 
   const submitForm = (form) => {
     return axios.post(`/users/submit`, form);
   };
 
-  const uploadFile = (file) => {
-    const url = "http://localhost:3000/uploadFile";
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("fileName", file.name);
-    const config = {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    };
-    axios.post(url, formData, config).then((response) => {
-      console.log(response.data);
-    });
-  };
-
   const search = (data) => {
     return axios.get(`/users/search/${data.field}/${data.input}`);
+  };
+
+  const uploadFile = async (e) => {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const res = await axios.post("/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      const { fileName, filePath } = res.data;
+      setUploadedFile({ fileName, filePath });
+    } catch (err) {
+      if (err.response.status === 500) {
+        setMessage("There was a problem with the server");
+      } else {
+        setMessage(err.response.data.msg);
+      }
+    }
   };
 
   useEffect(() => {}, [resultsState]);
@@ -52,7 +60,7 @@ function App() {
           onSubmit={(event) => {
             event.preventDefault();
             submitForm(formState);
-            uploadFile(fileState);
+            uploadFile(file);
           }}
         >
           <input
@@ -108,7 +116,7 @@ function App() {
           <input
             type="file"
             onChange={(e) => {
-              setFileState(e.target.files[0]);
+              setFile(e.target.files[0]);
             }}
           />
           <button className="submit" type="submit">
