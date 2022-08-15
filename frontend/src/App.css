@@ -32,3 +32,7 @@
 .submit:hover {
   background-color: #5c616d;
 }
+
+.results {
+  display: grid;
+}

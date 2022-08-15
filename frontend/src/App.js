@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
 
@@ -10,18 +10,37 @@ function App() {
     employment: "",
     email: "",
   });
+
   const [searchState, setSearchState] = useState({
     field: "name",
     input: "",
   });
+
+  const [resultsState, setResultsState] = useState([]);
 
   const submitForm = (form) => {
     return axios.post(`/users/submit`, form);
   };
 
   const search = (data) => {
-    console.log(data);
     return axios.get(`/users/search/${data.field}/${data.input}`);
+  };
+
+  useEffect(() => {}, [resultsState]);
+
+  const displayResults = (results) => {
+    console.log(results);
+    results.map((result) => {
+      return (
+        <div className="result">
+          <h3>Name: {result.name}</h3>
+          <h3>ID: {result.ID}</h3>
+          <h3>Department: {result.department}</h3>
+          <h3>Employment Status: {result.employment_status}</h3>
+          <h3>Email: {result.email}</h3>
+        </div>
+      );
+    });
   };
 
   return (
@@ -102,7 +121,9 @@ function App() {
           className="lookup-form"
           onSubmit={(event) => {
             event.preventDefault();
-            search(searchState);
+            search(searchState).then((res) => {
+              setResultsState(res.data);
+            });
           }}
         >
           <select
@@ -130,6 +151,20 @@ function App() {
             Search
           </button>
         </form>
+      </section>
+      <section className="results">
+        {resultsState.length > 0 &&
+          resultsState.map((result, i) => {
+            return (
+              <div className="result">
+                <h3>Name: {result.name}</h3>
+                <h3>ID: {result.id}</h3>
+                <h3>Department: {result.department}</h3>
+                <h3>Employment Status: {result.employment_status}</h3>
+                <h3>Email: {result.email}</h3>
+              </div>
+            );
+          })}
       </section>
     </div>
   );

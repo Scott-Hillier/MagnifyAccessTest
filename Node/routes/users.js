@@ -16,27 +16,23 @@ const addUser = (db, form) => {
 };
 
 const searchUsers = (db, field, input) => {
-  console.log("function", field, input);
   const query = `SELECT * FROM users
-  WHERE $1 LIKE $2;`;
-  const values = [field, `%${input}%`];
+  WHERE ${field} LIKE $1;`;
+  const values = [`%${input}%`];
   return db.query(query, values);
 };
 
 module.exports = (db) => {
   router.get(`/search/:field/:input`, (req, res) => {
-    console.log("hello", req.params.field, req.params.input);
     searchUsers(db, req.params.field, req.params.input)
       .then((data) => {
-        console.log("data.rows", data.rows);
-        res.send(data);
+        res.send(data.rows);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
   });
   router.post("/submit", (req, res) => {
-    console.log("HEHER", req.body);
     addUser(db, req.body)
       .then((data) => {
         console.log("Submitted");
