@@ -27,6 +27,7 @@
 
 .display-option:hover {
   cursor: pointer;
+  color: rgb(110, 118, 192);
 }
 
 .submission {
@@ -37,19 +38,36 @@
 .form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .input {
+  width: 20em;
   text-align: center;
   margin: 0.5em;
-
+  border: none;
+  border-bottom: 3px solid black;
   border-radius: 5px;
-  background-color: whitesmoke;
+  font-size: 25px;
+  color: white;
+  background-color: #2d3546;
+  outline: none;
+}
+
+::placeholder {
+  color: rgb(192, 192, 192);
 }
 
 .submit {
-  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: medium;
+  border: 2px solid black;
+  border-radius: 6px;
   margin: 0.55em;
+  height: 2em;
   width: 30%;
   background-color: aliceblue;
 }
@@ -60,6 +78,7 @@
 .lookup {
   display: flex;
   flex-direction: column;
+  margin-top: 1em;
 }
 
 .lookup-form {
@@ -69,6 +88,13 @@
 
 .select {
   margin: 0.5em;
+  border: 2px solid black;
+  border-radius: 6px;
+  background-color: aliceblue;
+}
+
+#search-input {
+  width: 20em;
 }
 
 .results-header {

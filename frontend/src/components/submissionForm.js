@@ -108,6 +108,7 @@ const SubmissionForm = () => {
           required
         ></input>
         <input
+          className="input"
           type="file"
           onChange={(e) => {
             setFile(e.target.files[0]);

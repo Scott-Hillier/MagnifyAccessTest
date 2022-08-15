@@ -41,6 +41,7 @@ const SearchForm = ({ resultsState, setResultsState }) => {
         </select>
         <input
           className="input"
+          id="search-input"
           placeholder={searchState.field}
           onChange={(e) => {
             setSearchState((prev) => {
