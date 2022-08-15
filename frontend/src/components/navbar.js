@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 
 const Navbar = () => {
   return (
-    <navbar>
-      <h1 id="title">Magnify Access Test</h1>
-    </navbar>
+    <nav className="navbar">
+      <h2 id="title">Magnify Access Test</h2>
+    </nav>
   );
 };
 

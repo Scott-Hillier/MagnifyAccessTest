@@ -45,7 +45,7 @@ const SearchForm = ({ resultsState, setResultsState }) => {
           placeholder={searchState.field}
           onChange={(e) => {
             setSearchState((prev) => {
-              return { ...prev, input: e.target.value };
+              return { ...prev, input: e.target.value.toLocaleLowerCase() };
             });
           }}
           required

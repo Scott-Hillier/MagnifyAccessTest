@@ -57,7 +57,7 @@ const SubmissionForm = () => {
           placeholder="Name"
           onChange={(e) => {
             setFormState((prev) => {
-              return { ...prev, name: e.target.value };
+              return { ...prev, name: e.target.value.toLocaleLowerCase() };
             });
           }}
           required
@@ -77,7 +77,10 @@ const SubmissionForm = () => {
           placeholder="Department"
           onChange={(e) => {
             setFormState((prev) => {
-              return { ...prev, department: e.target.value };
+              return {
+                ...prev,
+                department: e.target.value.toLocaleLowerCase(),
+              };
             });
           }}
           required
@@ -87,7 +90,10 @@ const SubmissionForm = () => {
           placeholder="Emplyment Status"
           onChange={(e) => {
             setFormState((prev) => {
-              return { ...prev, employment: e.target.value };
+              return {
+                ...prev,
+                employment: e.target.value.toLocaleLowerCase(),
+              };
             });
           }}
           required
@@ -97,7 +103,7 @@ const SubmissionForm = () => {
           placeholder="Email"
           onChange={(e) => {
             setFormState((prev) => {
-              return { ...prev, email: e.target.value };
+              return { ...prev, email: e.target.value.toLocaleLowerCase() };
             });
           }}
           required
