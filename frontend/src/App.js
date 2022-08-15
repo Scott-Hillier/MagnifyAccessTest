@@ -10,16 +10,31 @@ function App() {
     employment: "",
     email: "",
   });
-
   const [searchState, setSearchState] = useState({
     field: "name",
     input: "",
   });
+  const [fileState, setFileState] = useState("");
 
   const [resultsState, setResultsState] = useState([]);
 
   const submitForm = (form) => {
     return axios.post(`/users/submit`, form);
+  };
+
+  const uploadFile = (file) => {
+    const url = "http://localhost:3000/uploadFile";
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("fileName", file.name);
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
+    axios.post(url, formData, config).then((response) => {
+      console.log(response.data);
+    });
   };
 
   const search = (data) => {
@@ -28,23 +43,8 @@ function App() {
 
   useEffect(() => {}, [resultsState]);
 
-  const displayResults = (results) => {
-    console.log(results);
-    results.map((result) => {
-      return (
-        <div className="result">
-          <h3>Name: {result.name}</h3>
-          <h3>ID: {result.ID}</h3>
-          <h3>Department: {result.department}</h3>
-          <h3>Employment Status: {result.employment_status}</h3>
-          <h3>Email: {result.email}</h3>
-        </div>
-      );
-    });
-  };
-
   return (
-    <div className="App">
+    <main className="App">
       <section className="submission">
         <form
           method="POST"
@@ -52,6 +52,7 @@ function App() {
           onSubmit={(event) => {
             event.preventDefault();
             submitForm(formState);
+            uploadFile(fileState);
           }}
         >
           <input
@@ -107,7 +108,7 @@ function App() {
           <input
             type="file"
             onChange={(e) => {
-              console.log(e.target.value);
+              setFileState(e.target.files[0]);
             }}
           />
           <button className="submit" type="submit">
@@ -146,27 +147,37 @@ function App() {
                 return { ...prev, input: e.target.value };
               });
             }}
+            required
           ></input>
           <button className="submit" type="submit">
             Search
           </button>
         </form>
       </section>
-      <section className="results">
-        {resultsState.length > 0 &&
-          resultsState.map((result, i) => {
+      <br />
+      {resultsState.length > 0 && (
+        <table className="results">
+          <tr className="header">
+            <th>Name</th>
+            <th>ID</th>
+            <th>Department</th>
+            <th>Employment Status</th>
+            <th>Email</th>
+          </tr>
+          {resultsState.map((result) => {
             return (
-              <div className="result">
-                <h3>Name: {result.name}</h3>
-                <h3>ID: {result.id}</h3>
-                <h3>Department: {result.department}</h3>
-                <h3>Employment Status: {result.employment_status}</h3>
-                <h3>Email: {result.email}</h3>
-              </div>
+              <tr className="result">
+                <td>{result.name}</td>
+                <td>{result.id}</td>
+                <td>{result.department}</td>
+                <td>{result.employment_status}</td>
+                <td>{result.email}</td>
+              </tr>
             );
           })}
-      </section>
-    </div>
+        </table>
+      )}
+    </main>
   );
 }
 
