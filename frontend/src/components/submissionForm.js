@@ -49,6 +49,13 @@ const SubmissionForm = () => {
           event.preventDefault();
           submitForm(formState);
           uploadFile(file);
+          setFormState({
+            name: "",
+            id: 0,
+            department: "",
+            employment: "",
+            email: "",
+          });
         }}
       >
         <input
