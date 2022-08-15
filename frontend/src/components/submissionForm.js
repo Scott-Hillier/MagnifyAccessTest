@@ -42,7 +42,6 @@ const SubmissionForm = () => {
 
   return (
     <section className="submission">
-      <h3 className="sub-header">New Submission</h3>
       <form
         method="POST"
         className="form"

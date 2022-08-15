@@ -4,7 +4,7 @@ import axios from "axios";
 const Results = ({ resultsState }) => {
   return (
     <section>
-      <h3 className="sub-header">Results</h3>
+      <h3 className="results-header">Results</h3>
       <table className="results">
         <thead>
           <tr className="header">

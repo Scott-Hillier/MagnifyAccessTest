@@ -10,20 +10,23 @@
   color: whitesmoke;
 }
 
-.navbar {
-  height: 100px;
-  margin: 0 auto;
-}
-
 #title {
   color: aliceblue;
 }
 
-.sub-header {
+.display {
   display: flex;
-  width: 90vw;
-  align-items: right;
-  border-bottom: 2px solid black;
+  flex-direction: row;
+  width: 60vw;
+  justify-content: space-between;
+  align-items: center;
+  height: 2em;
+  border-bottom: 3px solid black;
+  margin-bottom: 1em;
+}
+
+.display-option:hover {
+  cursor: pointer;
 }
 
 .submission {
@@ -39,7 +42,7 @@
 .input {
   text-align: center;
   margin: 0.5em;
-  width: 30%;
+
   border-radius: 5px;
   background-color: whitesmoke;
 }
@@ -66,6 +69,10 @@
 
 .select {
   margin: 0.5em;
+}
+
+.results-header {
+  border-bottom: 3px solid black;
 }
 
 .results {

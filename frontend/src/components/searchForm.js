@@ -15,7 +15,6 @@ const SearchForm = ({ resultsState, setResultsState }) => {
 
   return (
     <section className="lookup">
-      <h3 className="sub-header">Search</h3>
       <form
         method="GET"
         className="lookup-form"
